@@ -17,13 +17,20 @@ public final class TitancraftQOL extends JavaPlugin {
         getConfig().options().copyDefaults(true);
         saveConfig();
         //Register features
-        if (getConfig().getBoolean("silent-mobs.enabled")) {
-            String silentName = getConfig().getString("silent-mobs.name");
-            getServer().getPluginManager().registerEvents(new SilentMobs(silentName, this), this);
-        }
-        if (getConfig().getBoolean("anti-enderman-grief.enabled")) {
-            getServer().getPluginManager().registerEvents(new AntiEndermanGrief(this), this);
-        }
+        //Silent Mobs
+        SilentMobs silentMobs = new SilentMobs(this);
+        getServer().getPluginManager().registerEvents(silentMobs, this);
+        silentMobs.updateAllLoadedEntities();
+        //Anti Enderman Grief
+        getServer().getPluginManager().registerEvents(new AntiEndermanGrief(this), this);
+
+        //Register commands
+        getCommand("titancraftqol").setExecutor((sender, command, label, args) -> {
+            reloadConfig();
+            silentMobs.updateAllLoadedEntities();
+            sender.sendMessage("TitancraftQOL config reloaded!");
+            return true;
+        });
 
         getLogger().info("TitancraftQOL enabled!");
     }
