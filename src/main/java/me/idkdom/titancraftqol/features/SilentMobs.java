@@ -56,5 +56,4 @@ public class SilentMobs implements Listener {
         });
     }
 
-
 }

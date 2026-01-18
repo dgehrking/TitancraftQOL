@@ -1,3 +1,6 @@
 silent-mobs:
   enabled: true
   name: "silence"
+
+anti-enderman-grief:
+  enabled: true
