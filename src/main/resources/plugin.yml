@@ -1,0 +1,5 @@
+name: TitancraftQOL
+version: '${version}'
+main: me.idkdom.titancraftqol.TitancraftQOL
+api-version: '1.21'
+description: Quality-of-life tweaks for Titancraft
