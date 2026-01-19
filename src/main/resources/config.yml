@@ -7,3 +7,6 @@ anti-enderman-grief:
 
 no-anvil-limit:
   enabled: true
+
+cauldron-concrete-conversion:
+  enabled: true

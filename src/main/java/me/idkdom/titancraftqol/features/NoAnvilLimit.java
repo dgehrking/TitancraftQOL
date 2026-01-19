@@ -10,10 +10,18 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class NoAnvilLimit implements Listener {
     private final JavaPlugin plugin;
 
+    /**
+     * No Anvil Limit constructor
+     * @param plugin instance of plugin
+     */
     public NoAnvilLimit(JavaPlugin plugin) {
         this.plugin = plugin;
     }
 
+    /**
+     * Removes maximum repiar cost if is the case in the config
+     * @param event prepare anvil event
+     */
     @SuppressWarnings("removal")
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPrepareAnvil(PrepareAnvilEvent event) {

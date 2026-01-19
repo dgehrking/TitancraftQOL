@@ -1,5 +1,6 @@
 package me.idkdom.titancraftqol;
 
+import me.idkdom.titancraftqol.features.CauldronConcreteConversion;
 import me.idkdom.titancraftqol.features.NoAnvilLimit;
 import me.idkdom.titancraftqol.features.SilentMobs;
 import me.idkdom.titancraftqol.features.AntiEndermanGrief;
@@ -16,6 +17,7 @@ public final class TitancraftQOL extends JavaPlugin {
         getConfig().addDefault("silent-mobs.name", "silence");
         getConfig().addDefault("anti-enderman-grief.enabled", false);
         getConfig().addDefault("no-anvil-limit.enabled", false);
+        getConfig().addDefault("cauldron-concrete-conversion.enabled", false);
         getConfig().options().copyDefaults(true);
         saveConfig();
         //Register features
@@ -27,6 +29,8 @@ public final class TitancraftQOL extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new AntiEndermanGrief(this), this);
         //No Anvil Limit
         getServer().getPluginManager().registerEvents(new NoAnvilLimit(this), this);
+        //Cauldron Concrete Conversion
+        getServer().getPluginManager().registerEvents(new CauldronConcreteConversion(this), this);
 
         //Register commands
         getCommand("titancraftqol").setExecutor((sender, command, label, args) -> {
