@@ -10,3 +10,11 @@ no-anvil-limit:
 
 cauldron-concrete-conversion:
   enabled: true
+
+silk-touch:
+  budding-amethyst: false
+  reinforced-deepslate: false
+
+baby-mobs:
+  enabled: false
+  name: "baby"
