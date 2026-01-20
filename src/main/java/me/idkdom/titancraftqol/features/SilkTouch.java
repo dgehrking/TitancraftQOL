@@ -29,10 +29,10 @@ public class SilkTouch implements Listener {
         ItemStack heldItem = event.getPlayer().getInventory().getItemInMainHand();
         if (heldItem.getEnchantmentLevel(Enchantment.SILK_TOUCH) > 0) {
             if (plugin.getConfig().getBoolean("silk-touch.reinforced-deepslate", true)) {
-                event.setDropItems(true);
+                event.getBlock().getType().asItemType().createItemStack(1);
             }
             if (plugin.getConfig().getBoolean("silk-touch.budding-amethyst", true)) {
-                event.setDropItems(true);
+                event.getBlock().getType().asItemType().createItemStack(1);
             }
         }
     }
