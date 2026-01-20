@@ -20,6 +20,10 @@ public class SilkTouch implements Listener {
         this.plugin = plugin;
     }
 
+    /**
+     * Functionality for illegal silk touching
+     * @param event player break block event
+     */
     @EventHandler
     public void onPlayerBreak(BlockBreakEvent event) {
         Material type = event.getBlock().getType();
