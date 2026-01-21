@@ -1,6 +1,7 @@
 package me.idkdom.titancraftqol;
 
 import me.idkdom.titancraftqol.features.*;
+import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class TitancraftQOL extends JavaPlugin {
@@ -21,34 +22,50 @@ public final class TitancraftQOL extends JavaPlugin {
         getConfig().addDefault("baby-mobs.name", "baby");
         getConfig().options().copyDefaults(true);
         saveConfig();
+
+        //Register command
+        QolCommand command = new QolCommand(this);
+        getCommand("titancraftqol").setExecutor(command);
+        getCommand("titancraftqol").setTabCompleter(command);
+
         //Register features
+        reloadFeatures();
+
+        getLogger().info("TitancraftQOL enabled!");
+    }
+
+    /**
+     * Registers all the functionalities of the plugin
+     */
+    public void reloadFeatures() {
+        HandlerList.unregisterAll(this);
+
         //Silent Mobs
-        SilentMobs silentMobs = new SilentMobs(this);
-        getServer().getPluginManager().registerEvents(silentMobs, this);
-        silentMobs.updateAllEntities();
+        if (getConfig().getBoolean("silent-mobs.enabled")) {
+            SilentMobs silentMobs = new SilentMobs(this);
+            getServer().getPluginManager().registerEvents(silentMobs, this);
+            silentMobs.updateAllEntities();
+        }
         //Anti Enderman Grief
-        getServer().getPluginManager().registerEvents(new AntiEndermanGrief(this), this);
+        if (getConfig().getBoolean("anti-enderman-grief.enabled")) {
+            getServer().getPluginManager().registerEvents(new AntiEndermanGrief(this), this);
+        }
         //No Anvil Limit
-        getServer().getPluginManager().registerEvents(new NoAnvilLimit(this), this);
+        if (getConfig().getBoolean("no-anvil-limit.enabled")) {
+            getServer().getPluginManager().registerEvents(new NoAnvilLimit(this), this);
+        }
         //Cauldron Concrete Conversion
-        getServer().getPluginManager().registerEvents(new CauldronConcreteConversion(this), this);
+        if (getConfig().getBoolean("cauldron-concrete-conversion")) {
+            getServer().getPluginManager().registerEvents(new CauldronConcreteConversion(this), this);
+        }
         //Silk Touch
         getServer().getPluginManager().registerEvents(new SilkTouch(this), this);
         //Baby Mobs
-        BabyMobs babyMobs = new BabyMobs(this);
-        getServer().getPluginManager().registerEvents(babyMobs, this);
-        babyMobs.updateAllEntities();
-
-        //Register commands
-        getCommand("titancraftqol").setExecutor((sender, command, label, args) -> {
-            reloadConfig();
-            silentMobs.updateAllEntities();
+        if (getConfig().getBoolean("baby-mobs.enabled")) {
+            BabyMobs babyMobs = new BabyMobs(this);
+            getServer().getPluginManager().registerEvents(babyMobs, this);
             babyMobs.updateAllEntities();
-            sender.sendMessage("TitancraftQOL config reloaded!");
-            return true;
-        });
-
-        getLogger().info("TitancraftQOL enabled!");
+        }
     }
 
     @Override

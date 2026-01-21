@@ -6,8 +6,8 @@ description: Quality-of-life tweaks for Titancraft
 
 commands:
   titancraftqol:
-    description: Reloads TitancraftQOL config
-    usage: /titancraftqol reload
+    description: Main command for titancraftQOL
+    usage: /titancraftqol
     permission: titancraftqol.admin
 
 permissions:
