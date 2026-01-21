@@ -23,7 +23,7 @@ public final class TitancraftQOL extends JavaPlugin {
         //Silent Mobs
         SilentMobs silentMobs = new SilentMobs(this);
         getServer().getPluginManager().registerEvents(silentMobs, this);
-        silentMobs.updateAllLoadedEntities();
+        silentMobs.updateAllEntities();
         //Anti Enderman Grief
         getServer().getPluginManager().registerEvents(new AntiEndermanGrief(this), this);
         //No Anvil Limit
@@ -32,11 +32,16 @@ public final class TitancraftQOL extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new CauldronConcreteConversion(this), this);
         //Silk Touch
         getServer().getPluginManager().registerEvents(new SilkTouch(this), this);
+        //Baby Mobs
+        BabyMobs babyMobs = new BabyMobs(this);
+        getServer().getPluginManager().registerEvents(babyMobs, this);
+        babyMobs.updateAllEntities();
 
         //Register commands
         getCommand("titancraftqol").setExecutor((sender, command, label, args) -> {
             reloadConfig();
-            silentMobs.updateAllLoadedEntities();
+            silentMobs.updateAllEntities();
+            babyMobs.updateAllEntities();
             sender.sendMessage("TitancraftQOL config reloaded!");
             return true;
         });

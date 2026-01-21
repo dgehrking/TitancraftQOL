@@ -64,7 +64,7 @@ public class SilentMobs implements Listener {
     /**
      * Called on startup or reload to update all mobs' silent state
      */
-    public void updateAllLoadedEntities() {
+    public void updateAllEntities() {
         for (World world : Bukkit.getWorlds()) {
             for (LivingEntity entity : world.getLivingEntities()) {
                 updateEntity(entity);
