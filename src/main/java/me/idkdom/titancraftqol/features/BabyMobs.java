@@ -23,14 +23,27 @@ public class BabyMobs implements Listener {
         this.plugin = plugin;
     }
 
+    /**
+     * Check for baby name in config
+     * @return baby name
+     */
     private String getBabyName() {
         return plugin.getConfig().getString("baby-mobs.name");
     }
 
+    /**
+     * Check if feature is enabled
+     * @return true/false for if the feature is enabled
+     */
     private boolean featureEnabled() {
         return plugin.getConfig().getBoolean("baby-mobs.enabled", true);
     }
 
+    /**
+     * Check if the entity has a baby name
+     * @param entity entity to be checked
+     * @return true/false for if the entity is named the baby name
+     */
     private boolean isBabyName(LivingEntity entity) {
         Component nameComponent = entity.customName();
         if (nameComponent == null) return false;
@@ -38,6 +51,10 @@ public class BabyMobs implements Listener {
         return name.equals(getBabyName()); //case-sensitive
     }
 
+    /**
+     * Updates entities based on the config and if they should be babies or not
+     * @param entity entity to be updated
+     */
     private void updateLivingEntity(LivingEntity entity) {
         if (!(entity instanceof Breedable breedable)) return;
         if (isBabyName(entity)) {
@@ -63,21 +80,24 @@ public class BabyMobs implements Listener {
         }
     }
 
+    /**
+     * Update creature's state on spawn
+     * @param event creature spawn event
+     */
     @EventHandler
     public void onCreatureSpawn(CreatureSpawnEvent event) {
         LivingEntity entity = event.getEntity();
-
-        if (!isBabyName(entity)) return;
-
         updateLivingEntity(entity);
     }
 
+    /**
+     * Update creature when right-clicked by a player
+     * @param event player interaction event
+     */
     @EventHandler
     public void onNameChange(PlayerInteractEntityEvent event) {
         if (!(event.getRightClicked() instanceof LivingEntity entity)) return;
-        Bukkit.getScheduler().runTask(plugin, () -> {
-           updateLivingEntity(entity);
-        });
+        Bukkit.getScheduler().runTask(plugin, () -> updateLivingEntity(entity));
     }
 
 }
