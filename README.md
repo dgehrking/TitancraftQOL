@@ -27,6 +27,11 @@ Modify configs and reload the plugin via in-game commands.
 ## License
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
 
+## Downloads
+Latest releases:  
+https://github.com/idkdom-dev/TitancraftQOL/releases
+
+
 ---
 
 To get started on your server, put the `.jar` file in the plugins folder and run `/titancraftqol`
